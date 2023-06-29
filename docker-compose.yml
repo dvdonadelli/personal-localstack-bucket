@@ -1,12 +1,15 @@
-version: "3.8"
+version: "3"
 
 services:
   localstack:
     container_name: "localstack"
     image: localstack/localstack
     ports:
-      - "4566:4566"            # LocalStack Gateway
+      - "4566:4566"
     environment:
       - SERVICES=s3
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
+    volumes:
+      - /Users/tfarconi/.colima/docker.sock:/var/run/docker.sock
+      - ./docker/localstack:/docker-entrypoint-initaws.d
